@@ -7,6 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors')
 app.use(cors())
 
+
 app.listen(3000, () => {
     console.log('server port on 3000');
 })
