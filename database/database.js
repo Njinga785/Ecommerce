@@ -6,6 +6,7 @@ var connection = mysql.createConnection({
     database: 'ecommerce'
 });
 
+
 connection.connect(function(error){
     if(error){
        throw error;
