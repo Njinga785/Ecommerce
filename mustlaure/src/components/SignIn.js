@@ -3,7 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 class SignIn extends Component { 
-     
+     state ={
+
+     }
 
      handleSubmit = (e) => {
          console.log(e)
@@ -15,7 +17,6 @@ class SignIn extends Component {
     render() {
         return (
             <div> 
-            <Button variant="danger">Test</Button>
             <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
