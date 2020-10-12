@@ -5,30 +5,45 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 var salt = bcrypt.genSaltSync(10);
-const config = require('./config.js'); 
+const config = require('./config.js');
 
 
 //routes users
 routes.post("/sign-up", (req, res) => {
-    bcrypt.genSalt(saltRounds, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-            // console.log(hash)
-            var sql = `INSERT INTO users (name, email,password, picture) VALUES ('${req.body.name}', '${req.body.email}', '${hash}', '${req.body.picture}')`;
-            db.query(sql, hash, function (err, result) {
-                if (err) throw err;
-                console.log(result)
-                res.send(result)
+    try {
+        if (!req.body.name) throw 'NO NAME'
+        if (!req.body.email) throw 'NO EMAIL'
+        if (!req.body.password) throw 'NO PASSWORD'
+        if (!req.body.picture) throw 'NO PICTURE'
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(req.body.password, salt, (err, hash) => {
+                // console.log(hash)
+                var sql = `INSERT INTO users (name, email,password, picture) VALUES ('${req.body.name}', '${req.body.email}', '${hash}', '${req.body.picture}')`;
+                db.query(sql, hash, function (err, result) {
+                    if (err) throw err;
+                    console.log(result)
+                    res.send(result)
+                });
             });
         });
-    });
+    } catch (err) {
+        res.status(403).send(err)
+    }
+
 })
 
 routes.get('/get-users', (req, res) => {
-    db.query(`SELECT name, id FROM users`, function (err, res) {
-        if (err) throw err
-        console.log(res)
-        res.send(res)
-    })
+    try {
+        if (!req.body.name) throw 'NO NAME'
+        db.query(`SELECT name, id FROM users`, function (err, res) {
+            if (err) throw err
+            console.log(res)
+            res.send(res)
+        })
+    } catch (err) {
+        res.status(403).send(err)
+    }
+
 })
 
 routes.post('/sign-in', (req, res) => {
@@ -64,29 +79,40 @@ routes.post('/sign-in', (req, res) => {
     })
 })
 
-routes.get('/get-users/:id', (req, res) => {
-    db.query(`SELECT users.id, users.name, users.email, users.picture, users.password  FROM users INNER JOIN products ON users.id = products.userid WHERE products.userid = ${req.params.id}`, function (err, results) {
-        if (err) throw err;
-        // console.log(results) 
-        res.send(results)
-    })
+routes.get('/get-user/:id', (req, res) => {
+    try {
+        if (!req.body.name) throw 'NO NAME'
+        db.query(`SELECT * FROM users WHERE name= ${req.body.name}`, function (err, results) {
+            if (err) throw err;
+            // console.log(results) 
+            res.send(results)
+        })
+    } catch (err) {
+        res.status(403).send(err)
+    }
+
 
 })
 
 //routes products 
 routes.get('/get-products', (req, res) => {
-    db.query(`SELECT * FROM products`, function (err, result) {
-        if (err) throw err
-        console.log(res)
-        res.send(result)
-    })
+    try {
+        db.query(`SELECT * FROM products`, function (err, result) {
+            if (err) throw err
+            console.log(res)
+            res.send(result)
+        })
+    } catch (err) {
+        res.status(403).send(err)
+    }
+
 })
 
 routes.use("/add-new-product", (req, res, next) => {
     const authHeader = req.headers.token
     console.log(req.headers.token)
     const token = authHeader
-    
+
     if (token) {
         jwt.verify(token, config.secret, (err, decodedToken) => {
             if (err) {
@@ -104,22 +130,38 @@ routes.use("/add-new-product", (req, res, next) => {
 })
 
 routes.post('/add-new-product', (req, res) => {
-    var sql = `INSERT INTO products (name, price, category, description, picture, userid ) VALUES ('${req.body.name}', '${req.body.price}', 
+    try { 
+        if(!req.body.name)throw 'NO NAME' 
+        if(!req.body.price)throw 'NO PRICE' 
+        if(!req.body.category)throw 'NO CATEGORY'
+        if(!req.body.description)throw 'NO DESCRIPTION'
+        if(!req.body.picture)throw 'NO PICTURE' 
+        if(!req.body.userid)throw 'NO USERID'
+        var sql = `INSERT INTO products (name, price, category, description, picture, userid ) VALUES ('${req.body.name}', '${req.body.price}', 
     '${req.body.category}', '${req.body.description}', '${req.body.picture}', '${req.body.userid}')`;
-    db.query(sql, function (err, result) {
-        if (err) throw err
-        console.log('un product ajouté')
-        res.send(result)
-    })
-}) 
+        db.query(sql, function (err, result) {
+            if (err) throw err
+            console.log('un product ajouté')
+            res.send(result)
+        })
+    }catch(err){
+        res.status(403).send
+    }
+    
+})
 
 routes.get('/get-product/:id', (req, res) => {
-    db.query(`SELECT products.id, products.name, products.price, products.category, 
-     products.description, products.picture, products.userid  FROM products INNER JOIN users ON products.userid = users.id WHERE products.userid = ${req.params.id}`, function (err, results) {
-        if (err) throw err;
-         console.log(results) 
-        res.send(results)
-    })
+    try {
+        if (!req.body.name) throw 'NO NAME'
+        db.query(`SELECT * FROM products WHERE name=${req.body.name}`, function (err, results) {
+            if (err) throw err;
+            console.log(results)
+            res.send(results)
+        })
+    } catch (err) {
+        res.status(403).send(err)
+    }
+
 
 })
 
