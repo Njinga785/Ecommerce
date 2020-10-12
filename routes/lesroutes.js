@@ -19,7 +19,6 @@ routes.post("/sign-up", (req, res) => {
                 console.log(result)
                 res.send(result)
             });
-            
         });
     });
 })
