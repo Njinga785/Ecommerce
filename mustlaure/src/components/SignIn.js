@@ -3,10 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 class SignIn extends Component { 
-     state ={
-
-     }
-
+     
      handleSubmit = (e) => {
          console.log(e)
      } 

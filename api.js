@@ -11,7 +11,7 @@ app.use(cors())
 app.use(routes)
 
 
-app.listen(3000, () => {
-    console.log('server port on 3000');
+app.listen(3001, () => {
+    console.log('server port on 3001');
 })
 
