@@ -10,15 +10,26 @@ class SignIn extends Component {
      }
 
      handleSubmit = (e) => { 
+       e.preventDefault({
+        email: this.email, 
+        password:this.password
+      }) 
+       console.log()
        axios.post('http://localhost:3000/sign-in', {
          email: this.email, 
          password:this.password
+       }) 
+       .then((response) => {
+         console.log(response)
+       }) 
+       .catch((err) => {
+         console.log(err)
        })
      } 
 
      handleChange = (e) => { 
        this.setState({
-        [e.target.controlId]: e.target.value
+        [e.target.id]: e.target.value
        })
         
      }
@@ -26,7 +37,7 @@ class SignIn extends Component {
         return (
             <div> 
             <Form onSubmit={this.handleSubmit}>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="email">
               <Form.Label htmlFor="email">Email address</Form.Label>
               <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" />
               <Form.Text className="text-muted">
@@ -34,7 +45,7 @@ class SignIn extends Component {
               </Form.Text>
             </Form.Group>
           
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group controlId="password">
               <Form.Label htmlFor="password">Password</Form.Label>
               <Form.Control onChange={this.handleChange} type="password" placeholder="Password" />
             </Form.Group>
