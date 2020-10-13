@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios'
 
 class SignIn extends Component { 
      state ={
-
+      email:'',
+      password:''
      }
 
-     handleSubmit = (e) => {
-         console.log(e)
+     handleSubmit = (e) => { 
+       axios.post('http://localhost:3000/sign-in', {
+         email: this.email, 
+         password:this.password
+       })
      } 
 
-     handleChange = (e) => {
-         console.log(e)
+     handleChange = (e) => { 
+       this.setState({
+        [e.target.controlId]: e.target.value
+       })
+        
      }
     render() {
         return (
             <div> 
             <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label htmlFor="email">Email address</Form.Label>
               <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -27,7 +35,7 @@ class SignIn extends Component {
             </Form.Group>
           
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label htmlFor="password">Password</Form.Label>
               <Form.Control onChange={this.handleChange} type="password" placeholder="Password" />
             </Form.Group>
             

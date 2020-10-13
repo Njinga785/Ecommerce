@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker'; 
 import "bootstrap/dist/css/bootstrap.min.css";
-// import NavBar from './components/NavBar';
+// import {createStore} from 'redux'
 
 
-// import Button from 'react-bootstrap/Button'; 
+
 
 
 
