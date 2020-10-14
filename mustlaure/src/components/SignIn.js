@@ -1,26 +1,36 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios'
+import axios from 'axios' 
+import jwt from "jsonwebtoken";
+
 
 class SignIn extends Component { 
-     state ={
+  constructor(){
+    super() 
+     this.state ={
       email:'',
       password:''
      }
-
+    }
      handleSubmit = (e) => { 
-       e.preventDefault({
-        email: this.email, 
-        password:this.password
-      }) 
-       console.log()
+       e.preventDefault() 
+      
        axios.post('http://localhost:3000/sign-in', {
-         email: this.email, 
-         password:this.password
+         email: this.state.email, 
+         password:this.state.password
        }) 
-       .then((response) => {
-         console.log(response)
+       .then((response) => { 
+        console.log(response)
+        let decoded = jwt.decode(response.data.token)
+        console.log(decoded)
+        if (decoded) {
+          localStorage.setItem('id', decoded.id) 
+          localStorage.setItem('name', decoded.name) 
+          localStorage.setItem('token', response.data.token)
+          // console.log({name:decoded.name, id:decoded.id})
+        }
+         
        }) 
        .catch((err) => {
          console.log(err)

@@ -1,37 +1,87 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios'
+//  import jwt from "jsonwebtoken";
 
-export class CreateProduct extends Component { 
-    
+export class CreateProduct extends Component {
+    constructor() {
+        super()
+        this.state = {
+            productName: '',
+            price: '',
+            shortDescription: '',
+            category: '',
+            picture: ''
+        }
+    }
+
+    handleSubmit = (e) => { 
+        e.preventDefault({
+            productName: this.state.productName,
+            price: this.state.price,
+            shortDescription: this.state.shortDescription,
+            category: this.state.category,
+            picture: this.state.picture,
+            user_id: localStorage.getItem('id')
+        })
+       
+        axios.post('http://localhost:3000/add-new-product', {
+            productName: this.state.productName,
+            price: this.state.price,
+            shortDescription: this.state.shortDescription,
+            category: this.state.category,
+            picture: this.state.picture,
+            user_id: localStorage.getItem('id')
+        },
+            {
+                headers: {
+                    token: localStorage.getItem('token')
+                   
+                }
+            })
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+
+    }
     render() {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
-                        <Form.Group controlId="formGridProductName">
-                            <Form.Label htmlFor="name">Product Name</Form.Label>
+                        <Form.Group controlId="productName">
+                            <Form.Label htmlFor="productName">Product Name</Form.Label>
                             <Form.Control onChange={this.handleChange} type="text" placeholder="Product Name" />
                         </Form.Group>
 
-                        <Form.Group controlId="formGridShortDescription">
-                            <Form.Label htmlFor="description">Short Description</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Short Description" />
+                        <Form.Group controlId="shortDescription">
+                            <Form.Label htmlFor="shortDescription">Short Description</Form.Label>
+                            <Form.Control onChange={this.handleChange} as="textarea" placeholder="Short Description" />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group controlId="formGridCategory">
+                        <Form.Group controlId="category">
                             <Form.Label htmlFor="category">Category</Form.Label>
                             <Form.Control onChange={this.handleChange} type="text" placeholder="Category" />
                         </Form.Group>
 
-                        <Form.Group controlId="formGridPrice">
+                        <Form.Group controlId="price">
                             <Form.Label htmlFor="price">Price</Form.Label>
                             <Form.Control onChange={this.handleChange} type="text" placeholder="Price" />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group controlId="formGridPictureLink">
+                        <Form.Group controlId="pictureLink">
                             <Form.Label htmlFor="pictureLink">Picture Link</Form.Label>
                             <Form.Control onChange={this.handleChange} type="text" placeholder="Picture Link" />
                         </Form.Group>
