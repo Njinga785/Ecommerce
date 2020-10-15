@@ -8,6 +8,12 @@ export class SignInLink extends Component {
         return (
 
             <Nav>
+            <Nav.Item>
+    <Nav.Link href="/signup">SignUp</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link href="/signin">SignIn</Nav.Link>
+  </Nav.Item>
   <Nav.Item>
     <Nav.Link href="/">ProductList</Nav.Link>
   </Nav.Item>
@@ -15,7 +21,7 @@ export class SignInLink extends Component {
     <Nav.Link href="/create">AddProducts</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link href="/">SignOut</Nav.Link>
+    <Nav.Link href="/signup">SignOut</Nav.Link>
   </Nav.Item>
   <Nav.Item>
     <Nav.Link href="/"> ML</Nav.Link>

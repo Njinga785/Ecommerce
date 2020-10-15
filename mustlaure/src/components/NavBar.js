@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav' 
+// import Nav from 'react-bootstrap/Nav' 
 import SignInLink from './SignInLink'
-import SignOutLink from './SignOutLink'
+// import SignOutLink from './SignOutLink'
 
 class NavBar extends Component {
     render() {
@@ -10,12 +10,10 @@ class NavBar extends Component {
            
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand href="#home">MustLaure</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home">SignIn</Nav.Link>
-                    <Nav.Link href="#features">SignUp</Nav.Link> 
+                
                     <SignInLink/> 
-                    <SignOutLink/>
-                </Nav>
+                    
+            
             </Navbar> 
            
            

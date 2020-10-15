@@ -81,9 +81,9 @@ export class CreateProduct extends Component {
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group controlId="pictureLink">
-                            <Form.Label htmlFor="pictureLink">Picture Link</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Picture Link" />
+                        <Form.Group controlId="picture">
+                            <Form.Label htmlFor="picture">Picture</Form.Label>
+                            <Form.Control onChange={this.handleChange} type="text" placeholder="Picture" />
                         </Form.Group>
 
 
