@@ -99,4 +99,4 @@ export class SignUp extends Component {
 } 
 const
 
-export default connect() SignUp
+export default  SignUp
