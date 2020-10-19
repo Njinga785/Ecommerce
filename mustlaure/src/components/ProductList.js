@@ -1,53 +1,55 @@
 import Axios from 'axios'
 import React, { Component } from 'react'
-import axios from 'axios' 
-import {Link} from 'react-router-dom'
+import axios from 'axios'
+import Card from 'react-bootstrap/Card'
+import { Link } from 'react-router-dom'
+import CardGroup from 'react-bootstrap/CardGroup'
 // import { response } from 'express'
 // import Product from './Product'
 
-export class ProductList extends Component { 
+export class ProductList extends Component {
 
-    constructor(){
-        super() 
-        this.state={
+    constructor() {
+        super()
+        this.state = {
             products: []
         }
-    } 
+    }
     componentDidMount() {
-        axios.get('http://localhost:3000/get-products') 
-        .then((response) => {
-            this.setState({
-                products: response.data
+        axios.get('http://localhost:3000/get-products')
+            .then((response) => {
+                this.setState({
+                    products: response.data
+                })
             })
-        })
     }
-    render() { 
+    render() {
+        const products=this.state.products
+       return(
+           <div className="product-list">
+        {products && products.map(product => {
 
-        const{products} = this.state 
-        const productList = products.length?(
-            products.map(product => {
-                return(
-                    <div className="produit" key={product.id}> 
-                    <div className="product-content">  
-                    <p>{product.picture}</p> 
-                    <Link to={'/' + product.id}>
-                    <span>{product.productName}</span> 
-                    </Link>
-                    <p>{product.price}</p>
-                    </div>
-                    </div>
+                return (
+                    <CardGroup style={{ width: '18rem' }} className="cards" key={product.id}>
+                        <Card className="card" >
+                            <Link to={'/' + product.id}>
+                                <Card.Img variant="top" src={product.picture} alt="" />
+                                <Card.Body className="body">
+                                    <Card.Title>{product.productName}</Card.Title>
+                                    <Card.Text>{product.price}</Card.Text>
+                                </Card.Body>
+                            </Link>
+
+                        </Card>
+                    </CardGroup>
+
                 )
-            })
-        ):(
-            <div className="center">No product</div>
-        )
-        return (
-            <div className="container"> 
-               {productList} 
-                
-            </div>
-        )
-    }
+            })}   
+       
+        
+        </div>
+    ) 
+        }
 }
 
 export default ProductList

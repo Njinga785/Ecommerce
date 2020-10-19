@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'; 
-import axios from 'axios'
+import axios from 'axios' 
+import {connect} from 'react-redux'
+import {ajouter} from './store/actions/actionUser'
 
 export class SignUp extends Component {  
   constructor(){
@@ -94,6 +96,7 @@ export class SignUp extends Component {
             </div>
         )
     }
-}
+} 
+const
 
-export default SignUp
+export default connect() SignUp

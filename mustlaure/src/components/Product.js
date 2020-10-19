@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'; 
+import Card from 'react-bootstrap/Card'
 // 
 
- class Product extends Component {
+class Product extends Component {
     constructor() {
         super()
         this.state = {
@@ -11,10 +12,10 @@ import Button from 'react-bootstrap/Button';
         }
     }
     componentDidMount() {
-        let id = this.props.match.params.id 
+        let id = this.props.match.params.id
         console.log(id)
         axios.get(`http://localhost:3000/get-product/${id}`)
-            .then((response) => { 
+            .then((response) => {
                 console.log(response)
                 this.setState({
                     product: response.data[0]
@@ -25,26 +26,21 @@ import Button from 'react-bootstrap/Button';
 
     render() {
         const product = this.state.product ? (
-            <div className="container">
-                <div className="photo">
-                    <p>{this.state.product.picture}</p>
-                </div>
-                <div className="product-content">
-                    <span>{this.state.product.productName}</span>
-                    <p>{this.state.product.price}</p>
-                    <textarea>{this.state.product.shortDescription}</textarea>
-                </div>
-                <div className="mb-2">
-                    <Button variant="success" size="sm">
-                        Add to Basket
-                    </Button>
-                </div>
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={this.state.product.picture} />
+                <Card.Body>
+                    <Card.Title>{this.state.product.productName}</Card.Title>
+                    <Card.Text>{this.state.product.price}</Card.Text> 
+                    <Card.Text>{this.state.product.shortDescription}</Card.Text>
+                    <Button variant="success">Add to Basket</Button>
+                </Card.Body>
+            </Card>
 
-            </div>
+
         ) : (
                 <div className="attente">Loading product...</div>
-            ) 
-            console.log(product)
+            )
+        console.log(product)
         return (
             <div className="container">
                 {product}
