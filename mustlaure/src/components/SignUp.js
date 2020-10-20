@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'; 
 import axios from 'axios' 
-import {connect} from 'react-redux'
-import {ajouter} from './store/actions/actionUser'
+// import {connect} from 'react-redux'
+
 
 export class SignUp extends Component {  
   constructor(){
@@ -38,7 +38,8 @@ export class SignUp extends Component {
           conPasword:this.state.conPasword
         }) 
         .then((response) => {
-          console.log(response)
+          console.log(response) 
+          
         }) 
         .catch((err) => {
           console.log(err)
@@ -97,6 +98,6 @@ export class SignUp extends Component {
         )
     }
 } 
-const
 
-export default  SignUp
+
+export default SignUp

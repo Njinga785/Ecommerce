@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
-import jwt from "jsonwebtoken"; 
+import jwt, { decode } from "jsonwebtoken"; 
+import {connect} from 'react-redux' 
+import {signIn} from './store/actions/actionUser'
+
 // import { Redirect } from "react-router-dom";
 // import SecuresRoutes from './SecuredRoutes'
 // import History from 'react-router-dom' 
@@ -36,9 +39,12 @@ class SignIn extends Component {
           localStorage.setItem('id', decoded.id)
           localStorage.setItem('name', decoded.name)
           localStorage.setItem('token', response.data.token) 
+          localStorage.setItem('email', decoded.email)
+          this.props.signIn(decoded.id, decoded.name, response.data.token, decoded.email)
          
           this.props.history.push('/')
-        }else{
+        }else{ 
+          
           console.log('acces interdit')
         }
 
@@ -53,8 +59,10 @@ class SignIn extends Component {
       [e.target.id]: e.target.value
     })
 
-  }
-  render() {
+  } 
+  
+  render() { 
+    console.log(this.props)
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -78,6 +86,11 @@ class SignIn extends Component {
       </div>
     )
   }
+} 
+
+const mapDispatchToProps = {
+  signIn
+  
 }
 
-export default SignIn
+export default connect( mapDispatchToProps) (SignIn)

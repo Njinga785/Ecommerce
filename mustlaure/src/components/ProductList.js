@@ -1,9 +1,11 @@
-import Axios from 'axios'
+// import axios from 'axios'
 import React, { Component } from 'react'
 import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
-import CardGroup from 'react-bootstrap/CardGroup'
+import CardGroup from 'react-bootstrap/CardGroup' 
+ import {connect} from 'react-redux' 
+ import {getProducts} from './store/actions/actionProduct'
 // import { response } from 'express'
 // import Product from './Product'
 
@@ -50,6 +52,10 @@ export class ProductList extends Component {
         </div>
     ) 
         }
+} 
+const mapStateToProps = (state) => {
+    
+    products: state.productReducer.product
 }
 
-export default ProductList
+export default connect(mapStateToProps) (ProductList)
