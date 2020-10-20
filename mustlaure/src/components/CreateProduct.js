@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios'
+import axios from 'axios'  
+import {connect} from 'react-redux'
+import {addProduct} from './store/actions/actionProduct'
 //  import jwt from "jsonwebtoken";
 
 export class CreateProduct extends Component {
@@ -41,7 +43,8 @@ export class CreateProduct extends Component {
                 }
             })
             .then((response) => {
-                console.log(response)
+                console.log(response) 
+                this.props.addProduct()
             })
             .catch((err) => {
                 console.log(err)
@@ -96,6 +99,9 @@ export class CreateProduct extends Component {
             </div>
         )
     }
+} 
+const apDispatchToProps = {
+    addProduct
 }
 
-export default CreateProduct
+export default connect() (CreateProduct)

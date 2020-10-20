@@ -4,8 +4,8 @@ import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
 import CardGroup from 'react-bootstrap/CardGroup' 
- import {connect} from 'react-redux' 
- import {getProducts} from './store/actions/actionProduct'
+//  import {connect} from 'react-redux' 
+//  import {getProducts} from './store/actions/actionProduct'
 // import { response } from 'express'
 // import Product from './Product'
 
@@ -53,9 +53,6 @@ export class ProductList extends Component {
     ) 
         }
 } 
-const mapStateToProps = (state) => {
-    
-    products: state.productReducer.product
-}
 
-export default connect(mapStateToProps) (ProductList)
+
+export default ProductList

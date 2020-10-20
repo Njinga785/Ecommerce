@@ -1,7 +1,7 @@
 
 
-export const getListProducts = (products) => ({
-    type: "LIST-PRODUCTS",
+export const listProducts = (products) => ({
+    type: "ADD-PRODUCTS",
     products: products
 })
 

@@ -5,7 +5,7 @@ const initialState = {
 
 const productsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "LIST-PRODUCTS": 
+        case "ADD-PRODUCTS": 
             return {
                 ...state,
                 products: action.products
