@@ -6,8 +6,10 @@ import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
 import Product from './components/Product'
+import Profile from './components/Profile'
+import Yourproduct from './components/Yourproduct'
 import CreateProduct from './components/CreateProduct'; 
-// import SecuredRoutes from './components/SecuredRoutes'
+import Editprofile from './components/Editprofile';
 
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
       <NavBar/>
         <Switch>  
         <Route exact path='/' component={Home}/>
-        
+        <Route exact path= '/editprofile' component={Editprofile} />
         <Route exact path='/signin' component={SignIn}/> 
         <Route exact path='/signup' component={SignUp}/> 
         <Route exact path='/create' component={CreateProduct}/> 

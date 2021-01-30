@@ -4,13 +4,8 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import jwt, { decode } from "jsonwebtoken"; 
 import {connect} from 'react-redux' 
-import {signIn} from './store/actions/actionUser' 
-import {listProducts} from './store/actions/actionProduct'
+import {signIn} from './store/actions/actionUser'
 
-
-// import { Redirect } from "react-router-dom";
-// import SecuresRoutes from './SecuredRoutes'
-// import History from 'react-router-dom' 
 
 
 
@@ -35,15 +30,15 @@ class SignIn extends Component {
       .then((response) => { 
         
         console.log(response)
-        let decoded = jwt.decoded(response.data.token)
+        let decoded = jwt.decode(response.data.token)
         console.log(decoded)
         if (decoded) {
           localStorage.setItem('id', decoded.id)
           localStorage.setItem('name', decoded.name)
           localStorage.setItem('token', response.data.token) 
           localStorage.setItem('email', decoded.email)
-          this.props.signIn(decoded.id, decoded.name, response.data.token, decoded.email)
-         this.props.listProducts()
+          this.props.signIn(response.data.token, decoded.name, decoded.email, decoded.id)
+          // this.props.listProducts()
           this.props.history.push('/')
         }else{ 
           
@@ -64,7 +59,7 @@ class SignIn extends Component {
   } 
   
   render() { 
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -90,10 +85,10 @@ class SignIn extends Component {
   }
 } 
 
+const mapStateToProps = (state) => ({
+  mesUsers: state.userReducer
+})
 const mapDispatchToProps = {
-  signIn, 
-  listProducts
-  
-}
-
-export default connect(null, mapDispatchToProps) (SignIn)
+  signIn
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

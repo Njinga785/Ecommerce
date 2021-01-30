@@ -119,7 +119,7 @@ routes.use("/add-new-product", (req, res, next) => {
         jwt.verify(token, config.secret, (err, decodedToken) => {
             if (err) { 
                 console.log(err)
-                res.status(403).send('oho');
+                res.status(403).send('error');
             } else {
                 console.log('test');
                 next()
@@ -127,7 +127,6 @@ routes.use("/add-new-product", (req, res, next) => {
         })
 
     } else { 
-        console.log('bonjour')
         res.status(403).send('oui');
     }
 
@@ -157,7 +156,6 @@ routes.post('/add-new-product', (req, res) => {
 
 routes.get('/get-product/:id', (req, res) => {
     try {
-        // if (!req.body.productName) throw 'NO NAME'
         db.query(`SELECT * FROM products WHERE products.id=${req.params.id}`, function (err, results) {
             if (err) throw err;
             console.log(req.params.id)

@@ -55,7 +55,7 @@ export class SignUp extends Component {
     render() {
         return (
             <div>
-            <Form onSubmit={this.handleSubmit}>
+            <Form style={{marginLeft: 20}} onSubmit={this.handleSubmit}>
             <Form.Row>
               <Form.Group  controlId="firstName">
                 <Form.Label htmlFor="firstName">First Name</Form.Label>

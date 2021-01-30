@@ -4,7 +4,8 @@
   "description": "��#\u0000 \u0000E\u0000c\u0000o\u0000m\u0000m\u0000e\u0000r\u0000c\u0000e\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./api.js"
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,20 @@
   },
   "homepage": "https://github.com/Njinga785/Ecommerce#readme",
   "dependencies": {
+    "@types/jwt-decode": "^2.2.1",
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.0.0",
     "mysql2": "^2.2.5",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "case-sensitive-paths-webpack-plugin": "^2.3.0"
   }
 }

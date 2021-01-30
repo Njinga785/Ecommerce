@@ -39,12 +39,11 @@ export class CreateProduct extends Component {
             {
                 headers: {
                     token: localStorage.getItem('token')
-                   
                 }
             })
             .then((response) => {
                 console.log(response) 
-                this.props.addProduct()
+                // this.props.addProduct()
             })
             .catch((err) => {
                 console.log(err)
@@ -100,7 +99,7 @@ export class CreateProduct extends Component {
         )
     }
 } 
-const apDispatchToProps = {
+const mapDispatchToProps = {
     addProduct
 }
 

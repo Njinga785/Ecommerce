@@ -12,22 +12,20 @@ code {
     monospace;
 } 
 
-.product-list {   
-  display: flex;  
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0; 
-  padding: 0;
-} 
 
-.cards {
-  flex: 1 1 29rem; 
-  height: 60rem; 
-  
-  padding: 1rem; 
-  margin: 1rem;
-}  
+.product-list {
+  margin: 1em;
+}
+.linear {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.title {
+  text-decoration: underline;
+  margin: 1em;
+}
+
 
 
 

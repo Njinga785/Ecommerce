@@ -10,7 +10,6 @@ export class SignOutLink extends Component {
               <Nav.Link href="/">SignUP</Nav.Link>
               <Nav.Link href="/">SignIn</Nav.Link>
             </Nav.Item>
-            
           </Nav>
           
             </div>
